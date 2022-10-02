@@ -9,8 +9,6 @@ const HomeScreen = () => {
   const navigation = useNavigation();
 
   const handleSignOut = () => {
-    console.log("Signed Out");
-
     const auth = getAuth();
     auth
       .signOut()
@@ -21,8 +19,6 @@ const HomeScreen = () => {
       .catch((err) => {
         console.log(err.message);
       });
-
-    navigation.replace("Login");
   };
   return (
     <View style={styles.container}>
@@ -30,9 +26,6 @@ const HomeScreen = () => {
       <Pressable style={styles.button} onPress={handleSignOut}>
         <Text style={styles.buttonText}>Sign Out</Text>
       </Pressable>
-      {/* <TouchableOpacity style={styles.button} onPress={handleSignOut}>
-        <Text style={styles.buttonText}>Sign Out</Text>
-      </TouchableOpacity> */}
     </View>
   );
 };
