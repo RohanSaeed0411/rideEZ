@@ -18,6 +18,8 @@ import {
 } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
+import RegistrationScreen from "./RegistrationScreen";
+
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,14 +38,16 @@ const LoginScreen = () => {
   }, []);
 
   const handleSignUp = () => {
-    createUserWithEmailAndPassword(authentication, email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log("Registered with: " + user.email);
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+    // createUserWithEmailAndPassword(authentication, email, password)
+    //   .then((userCredentials) => {
+    //     const user = userCredentials.user;
+    //     console.log("Registered with: " + user.email);
+    //   })
+    //   .catch((err) => {
+    //     alert(err.message);
+    //   });
+    navigation.replace("Registration");
+
   };
 
   const handleLogin = () => {
@@ -82,7 +86,7 @@ const LoginScreen = () => {
           onPress={handleSignUp}
           style={[styles.button, styles.buttonOutline]}
         >
-          <Text style={styles.buttonOutlineText}>Register</Text>
+          <Text style={styles.buttonOutlineText}>Register As New User</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
