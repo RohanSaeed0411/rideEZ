@@ -3,11 +3,12 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Alert,
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
-import { CurrentRenderContext, useNavigation } from "@react-navigation/native";
+import { CurrentRenderContext, ParamListBase, useNavigation } from "@react-navigation/native";
 import Transitioning from "react-native-reanimated";
 
 import { authentication } from "../firebase";
@@ -20,10 +21,15 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 
 import RegistrationScreen from "./RegistrationScreen";
 
+import { StackNavigationProp } from '@react-navigation/stack/';
+import {createAppContainer} from 'react-navigation'; 
+import {createStackNavigator} from 'react-navigation-stack';
+//import { StackParams} from '../screens';
+
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
 
   const auth = getAuth();
   useEffect(() => {
@@ -57,7 +63,7 @@ const LoginScreen = () => {
         console.log("Loged in with: " + user.email);
       })
       .catch((err) => {
-        alert(err.message);
+        Alert.alert(err.message);
       });
   };
   return (
