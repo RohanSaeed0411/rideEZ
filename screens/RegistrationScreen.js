@@ -76,6 +76,7 @@ export default function RegistrationScreen(props) {
         console.log("Registered with: " + user.email);
         setIsRegistraionSuccess(true);
         alert("Registered with: " + user.email);
+        
         navigation.replace("Login");
       })
       .catch((err) => {
