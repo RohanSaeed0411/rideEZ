@@ -4,11 +4,12 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Alert,
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
-import { CurrentRenderContext, useNavigation } from "@react-navigation/native";
+import { CurrentRenderContext, ParamListBase, useNavigation } from "@react-navigation/native";
 import Transitioning from "react-native-reanimated";
 
 import { authentication } from "../firebase";
@@ -18,8 +19,11 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { StackNavigationProp } from '@react-navigation/stack/';
+import {createAppContainer} from 'react-navigation'; 
+import {createStackNavigator} from 'react-navigation-stack';
 
-export default function RegistrationScreen(props) {
+export default function RegistrationScreen() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
@@ -28,7 +32,7 @@ export default function RegistrationScreen(props) {
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
   const [isRegistraionSuccess, setIsRegistraionSuccess] = useState(false);
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<ParamListBase>>();;
  
   // const emailInputRef = createRef();
   // const ageInputRef = createRef();
@@ -40,23 +44,23 @@ export default function RegistrationScreen(props) {
 
     setErrortext('');
     if (!name) {
-      alert('Please fill Name');
+      Alert.alert('Please fill Name');
       return;
     }
     if (!email) {
-      alert('Please fill Email');
+      Alert.alert('Please fill Email');
       return;
     }
     if (!age) {
-      alert('Please fill Age');
+      Alert.alert('Please fill Age');
       return;
     }
     if (!address) {
-      alert('Please fill Address');
+      Alert.alert('Please fill Address');
       return;
     }
     if (!password) {
-      alert('Please fill Password');
+      Alert.alert('Please fill Password');
       return;
     }
    
@@ -75,12 +79,12 @@ export default function RegistrationScreen(props) {
         const user = userCredentials.user;
         console.log("Registered with: " + user.email);
         setIsRegistraionSuccess(true);
-        alert("Registered with: " + user.email);
+        Alert.alert("Registered with: " + user.email);
         
         navigation.replace("Login");
       })
       .catch((err) => {
-        alert(err.message);
+        Alert.alert(err.message);
       });
   };
 

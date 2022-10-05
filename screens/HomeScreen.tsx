@@ -2,11 +2,15 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { authentication } from "../firebase";
-import { useNavigation } from "@react-navigation/native";
+import { ParamListBase, useNavigation } from "@react-navigation/native";
 import { getAuth } from "firebase/auth";
 
+import { StackNavigationProp } from '@react-navigation/stack/';
+import {createAppContainer} from 'react-navigation'; 
+import {createStackNavigator} from 'react-navigation-stack';
+
 const HomeScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
 
   const handleSignOut = () => {
     const auth = getAuth();
